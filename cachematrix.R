@@ -1,15 +1,24 @@
 ## Matrix inversion can be computationally intense.
-## The two functions below work together
+## Functions makeCacheMatrix() and cacheSolve() work together
 ## with an invertible matrix to make a list object
 ## that contains the calculated the inverse matrix,
 ## and makes it available for future retrieval.
+## 
+## Example:
+##      M <- matrix(...)
+##      newM <- makeCacheMatrix(M)
+##      inverseM <- cacheSolve(newM)    # inverseM is the inverse of M
+##      newM$getInverse()               # Also return the cached
+##                                      # inverse of M
 
 
-## makeCacheMatrix creates a list object for matrix x,
+## makeCacheMatrix() creates a list object for matrix x,
 ## where x is either passed as an argument
 ## or set by the set() function.
-## makeCacheMatrix can set/return x
-## and save/return inverse matrix of x.
+## makeCacheMatrix can set/return x via
+## functions set() and get(),
+## and save/return inverse matrix of x via
+## functions setInverse() and getInverse().
 
 makeCacheMatrix <- function(x = matrix()) {
 	
@@ -43,7 +52,7 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## cacheSolve takes a makeCacheMatrix object and
+## cacheSolve() takes a makeCacheMatrix() list and
 ## returns the inverse matrix.
 ## The function returns a cached inverse matrix if it exists.
 ## Otherwise, the function uses solve() to find the inverse
